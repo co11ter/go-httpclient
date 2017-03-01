@@ -309,6 +309,13 @@ func prepareRedirect(options map[int]interface{}) (func(req *http.Request, via [
 		}
 
 		redirectPolicy = func(req *http.Request, via []*http.Request) error {
+			if !govalidator.IsURL(req.URL.String()) {
+				return &Error{
+					Code: ERR_REDIRECT_POLICY,
+					Message: fmt.Sprintf("invalid url %s", req.URL),
+				}
+			}
+			
 			// no follow
 			if !followlocation || maxredirs <= 0 {
 				return &Error{
