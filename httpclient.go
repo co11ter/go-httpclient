@@ -25,6 +25,7 @@ import (
 	"compress/gzip"
 
 	"mime/multipart"
+	"github.com/asaskevich/govalidator"
 )
 
 // Constants definations
